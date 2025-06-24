@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# get the directory where the this running script is located
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") &> /dev/null && pwd)
+
+# find all files in $script_dir/runs that are executable
+scripts=$(find $script_dir/runs -mindepth 1 -maxdepth 1 -type f -executable)
