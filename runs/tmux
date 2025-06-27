@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-program=$(which tmux)
-
-if [ ! -d $program ];then
-    sudo apt update && sudo apt install tmux
+command=$(which tmux)
+if [ ! -f "$command" ]; then
+   sudo apt update && sudo apt install tmux
 else
-  echo "$program already exists... exiting
+  echo "$command already exists... exiting"
   exit 1
 fi
