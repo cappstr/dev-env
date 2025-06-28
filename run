@@ -6,7 +6,7 @@ script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") &> /dev/null && pwd)
 dry_run="0"
 filter=""
 
-while [ $# -gt 0 ]; do
+while [ "$#" -gt 0 ]; do
     if [ "$1" == "--dry" ]; then
         dry_run="1"
     else
@@ -26,15 +26,15 @@ log() {
 # find all files in $script_dir/runs that are executable
 scripts=$(find $script_dir/runs -mindepth 1 -maxdepth 1 -type f -executable)
 
-for script in "$scripts"; do
-    if basename "$script" | grep -qv "$filter"; then
+for script in $scripts; do
+    if echo "$script" | grep -qv "$filter"; then
 	log "FILTERED $script"
 	continue
     fi
-
-    log "RUNNING SCRIPT: $script"
+    
+    log "RUNNING SCRIPT $script"
 
     if [ "$dry_run" == "0" ]; then
-	"$script"
+	$script
     fi
 done
